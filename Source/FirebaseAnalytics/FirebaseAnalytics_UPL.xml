@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Firebase plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="FirebaseAnalytics init"/>
+	</init>
+
+	<buildscriptGradleAdditions>
+				<insert>
+
+        </insert>
+	</buildscriptGradleAdditions>
+
+	<buildGradleAdditions>
+				<insert>
+
+        </insert>
+	</buildGradleAdditions>
+
+	<gradleCopies>
+	</gradleCopies>
+
+  <proguardAdditions>
+    <insert>
+      
+
+    </insert>
+  </proguardAdditions>
+</root>

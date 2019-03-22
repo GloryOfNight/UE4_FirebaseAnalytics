@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "149300916034",
+    "firebase_url": "https://bombanino-3327b.firebaseio.com",
+    "project_id": "bombanino-3327b",
+    "storage_bucket": "bombanino-3327b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149300916034:android:8485a5e9f25f7d59",
+        "android_client_info": {
+          "package_name": "raygames.bombanino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149300916034-gqmbnt9rd1is3rk9a74k7hcdtjgvamg0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyd7iQTiO4yuR4lL-A9HFYpkIZZ6UGxe4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
