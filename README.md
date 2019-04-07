@@ -3,7 +3,7 @@ Free open source Firebase analytics provider for Unreal Engine 4.
 
 # Imrpotant notes: 
 Plugin currently support only Android target platfrom, iOS work in progress.
-Current supported engine version: 4.21.3 (master branch)\
+//Current supported engine version: 4.21.3 (master branch)
 
 # Setup
 1. Download version of plugin that support you're unreal project version
