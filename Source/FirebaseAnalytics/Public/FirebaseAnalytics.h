@@ -2,10 +2,21 @@
 
 #pragma once
 #include "Modules/ModuleManager.h"
+#include "../Public/FirebaseAnalyticsProvider.h"
+#include "Interfaces/IAnalyticsProviderModule.h"
 
-class FFirebaseAnalyticsModule : public IModuleInterface
+class FFirebaseAnalytics : public IAnalyticsProviderModule
 {
-public:
+	/** Singleton for analytics */
+
+	TSharedPtr<IAnalyticsProvider> FirebaseAnalyticsProvider;
+
+	static inline FFirebaseAnalytics& Get()
+	{
+		return FModuleManager::LoadModuleChecked< FFirebaseAnalytics >("FirebaseAnalytics");
+	}
+
+	virtual TSharedPtr<IAnalyticsProvider> CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate& GetConfigValue) const override;
 
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;

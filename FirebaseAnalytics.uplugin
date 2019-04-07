@@ -3,21 +3,21 @@
 	"Version": 1,
 	"VersionName": "1.0",
 	"FriendlyName": "FirebaseAnalytics",
-	"Description": "Plugin that provided analytics for firebase (Mobile platforms support only)",
-	"Category": "Other",
-	"CreatedBy": "Siahrei Dziki aka GloryOfNight",
-	"CreatedByURL": "",
+	"Description": "Firebase analytics provider for Unreal Engine 4",
+	"Category": "Analytics",
+	"CreatedBy": "GloryOfNight",
+	"CreatedByURL": "https://github.com/GloryOfNight",
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
-	"CanContainContent": true,
+	"CanContainContent": false,
 	"IsBetaVersion": false,
 	"Installed": false,
 	"Modules": [
 		{
 			"Name": "FirebaseAnalytics",
 			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen"
+			"LoadingPhase": "Default"
 		}
 	]
 }

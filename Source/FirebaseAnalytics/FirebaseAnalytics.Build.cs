@@ -1,4 +1,4 @@
-// Some copyright should be here...
+// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
 using System.IO;
@@ -8,39 +8,32 @@ public class FirebaseAnalytics : ModuleRules
 	public FirebaseAnalytics(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+		
+		PublicDependencyModuleNames.AddRange(new string[]{"Core", "CoreUObject", "ApplicationCore",  "Projects", "Analytics"});
 
-        PublicIncludePaths.AddRange(new string[] {Path.Combine(ModuleDirectory, "../ThirdParty/FirebaseCpp/include")});
+        PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/include/")));
 
-		PublicDependencyModuleNames.AddRange(new string[]{ "Core" });
-			
-		PrivateDependencyModuleNames.AddRange(new string[]{ "CoreUObject", "Engine", "Analytics" });
-
-
-        if (Target.Platform == UnrealTargetPlatform.Win32 || Target.Platform == UnrealTargetPlatform.Win64)
+        if (Target.Platform == UnrealTargetPlatform.Win64 || Target.Platform == UnrealTargetPlatform.Win32)
         {
-            PublicLibraryPaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/windows")));
+            string PlatformName = Target.Platform == UnrealTargetPlatform.Win64 ? "x64" : "x86";
 
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/windows/x64/firebase_analytics.lib")));
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/windows/x64/firebase_app.lib")));
+            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/windows/", PlatformName,"firebase_app.lib")));
+            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/windows/", PlatformName, "firebase_analytics.lib")));
         }
-
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            PublicDependencyModuleNames.AddRange(new string[] { "Launch" });
+            PublicDependencyModuleNames.AddRange(new string[] { "Launch" });  
 
-           // PublicLibraryPaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/armeabi")));
-            PublicLibraryPaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/armeabi-v7a")));
-          //  PublicLibraryPaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/arm64-v8a")));
-           
-            //PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/armeabi-v7a/c++/libfirebase_analytics.a")));
-           // PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/armeabi-v7a/c++/libfirebase_app.a")));
+            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_app.a")));
+            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_analytics.a")));
 
+          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_app.a")));
+          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_analytics.a")));
 
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/armeabi-v7a/gnustl/libfirebase_analytics.a")));
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/FireBaseCpp/libs/android/armeabi-v7a/gnustl/libfirebase_app.a")));
+          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_app.a")));
+          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_analytics.a")));
 
-            string PluginPath = Utils.MakePathRelativeTo(ModuleDirectory, Target.RelativeEnginePath);
-            AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(PluginPath, "FirebaseAnalytics_UPL.xml"));
+            AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "FirebaseAnalyticsAndroid_UPL.xml"));
         }
     }
 }

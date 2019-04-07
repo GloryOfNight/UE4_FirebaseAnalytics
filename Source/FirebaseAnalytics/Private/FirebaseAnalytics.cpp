@@ -1,22 +1,31 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 #include "FirebaseAnalytics.h"
+#include "Core.h"
+#include "Modules/ModuleManager.h"
+#include "Interfaces/IPluginManager.h"
+#include "Interfaces/IAnalyticsProvider.h"
+#include "../Public/FirebaseAnalyticsProvider.h"
 
 #define LOCTEXT_NAMESPACE "FFirebaseAnalyticsModule"
 
-void FFirebaseAnalyticsModule::StartupModule()
+
+
+void FFirebaseAnalytics::StartupModule()
 {
-	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	
+	FirebaseAnalyticsProvider = MakeShareable(new FFirebaseAnalyticsProvider());
 }
 
-void FFirebaseAnalyticsModule::ShutdownModule()
+void FFirebaseAnalytics::ShutdownModule()
 {
-	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-	// we call this function before unloading the module.
-	
+
+}
+
+TSharedPtr<IAnalyticsProvider> FFirebaseAnalytics::CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate & GetConfigValue) const
+{
+	return FirebaseAnalyticsProvider;
 }
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FFirebaseAnalyticsModule, FirebaseAnalytics)
+IMPLEMENT_MODULE(FFirebaseAnalytics, FirebaseAnalytics)
