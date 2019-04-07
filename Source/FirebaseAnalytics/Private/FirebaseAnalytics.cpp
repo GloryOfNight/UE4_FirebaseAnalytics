@@ -9,11 +9,9 @@
 
 #define LOCTEXT_NAMESPACE "FFirebaseAnalyticsModule"
 
-
-
 void FFirebaseAnalytics::StartupModule()
 {
-	FirebaseAnalyticsProvider = MakeShareable(new FFirebaseAnalyticsProvider());
+	
 }
 
 void FFirebaseAnalytics::ShutdownModule()
@@ -23,7 +21,8 @@ void FFirebaseAnalytics::ShutdownModule()
 
 TSharedPtr<IAnalyticsProvider> FFirebaseAnalytics::CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate & GetConfigValue) const
 {
-	return FirebaseAnalyticsProvider;
+	return GetConfigValue.IsBound() ?
+		MakeShareable(new FFirebaseAnalyticsProvider()) : nullptr;
 }
 
 #undef LOCTEXT_NAMESPACE

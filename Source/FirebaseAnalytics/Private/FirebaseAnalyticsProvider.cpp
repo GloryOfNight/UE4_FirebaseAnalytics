@@ -5,8 +5,6 @@
 #include "Runtime/ApplicationCore/Public/Android/AndroidApplication.h"
 #endif
 
-::firebase::App* g_firebaseApp = nullptr;
-
 FFirebaseAnalyticsProvider::FFirebaseAnalyticsProvider()
 {
 
@@ -17,16 +15,17 @@ bool FFirebaseAnalyticsProvider::StartSession(const TArray<FAnalyticsEventAttrib
 	if (!FirebaseAnalyticsStarted)
 	{
 #if PLATFORM_ANDROID
-		g_firebaseApp = ::firebase::App::Create(::firebase::AppOptions(), FAndroidApplication::GetJavaEnv(), FJavaWrapper::GameActivityThis);
+		firebaseAnalyticsApp = ::firebase::App::Create(::firebase::AppOptions(), FAndroidApplication::GetJavaEnv(), FJavaWrapper::GameActivityThis);
 #elif PLATFORM_IOS
-		g_firebaseApp = ::firebase::App::Create(::firebase::AppOptions());
+		firebaseAnalyticsApp = ::firebase::App::Create(::firebase::AppOptions());
 #else
 		UE_LOG(LogTemp, Warning, TEXT("Firebase analytics cannot start on this platform"));
 #endif
 
-		if (g_firebaseApp)
+		if (firebaseAnalyticsApp)
 		{
-			::firebase::analytics::Initialize(*g_firebaseApp);
+			::firebase::analytics::Initialize(*firebaseAnalyticsApp);
+			FirebaseAnalyticsStarted = true;
 			return true;
 		}
 	}
@@ -41,7 +40,7 @@ void FFirebaseAnalyticsProvider::RecordEvent(const FString& EventName, const TAr
 FString FFirebaseAnalyticsProvider::GetSessionID() const
 {
 	// Do nothing
-	return FString();
+	return "Unsupported";
 }
 
 bool FFirebaseAnalyticsProvider::SetSessionID(const FString & InSessionID)
@@ -63,7 +62,8 @@ void FFirebaseAnalyticsProvider::SetUserID(const FString & InUserID)
 
 FString FFirebaseAnalyticsProvider::GetUserID() const
 {
-	return "Cannon get UserID from this provider";
+	// Do nothing
+	return "Unsupported";
 }
 
 void FFirebaseAnalyticsProvider::EndSession()
@@ -73,11 +73,9 @@ void FFirebaseAnalyticsProvider::EndSession()
 		::firebase::analytics::Terminate();
 		FirebaseAnalyticsStarted = false;
 	}
-	
 }
 
 FFirebaseAnalyticsProvider::~FFirebaseAnalyticsProvider()
 {
-	delete g_firebaseApp;
-	g_firebaseApp = nullptr;
+	EndSession();
 }

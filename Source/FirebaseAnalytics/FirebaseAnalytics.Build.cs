@@ -26,12 +26,12 @@ public class FirebaseAnalytics : ModuleRules
 
             PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_app.a")));
             PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_analytics.a")));
-
-          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_app.a")));
-          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_analytics.a")));
-
-          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_app.a")));
-          //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_analytics.a")));
+            //     <-- Uncomment lines below for arm64 usage (and comment the other ones)-->
+            //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_app.a")));
+            //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_analytics.a")));
+            //     <-- Uncomment lines below for arm64 usage (and comment the other ones)-->
+            //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_app.a")));
+            //     PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_analytics.a")));
 
             AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "FirebaseAnalyticsAndroid_UPL.xml"));
         }
