@@ -63,7 +63,7 @@ void UFirebaseAnalyticsBPLib::SetFirebaseCurrentScreen(const FString ScreenName,
 {
 	if (GetFirebaseProvider())
 	{
-		::firebase::analytics::SetCurrentScreen(TCHAR_TO_UTF8(*ScreenName), "");
+		::firebase::analytics::SetCurrentScreen(TCHAR_TO_UTF8(*ScreenName), TCHAR_TO_UTF8(*ScreenClass));
 	}
 }
 
@@ -75,11 +75,11 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEvent(FString Name)
 	}
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParamName(FString Name, FString ParameterName)
+void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParamName(FString Name, FString ParameterName, FString Value)
 {
 	if (GetFirebaseProvider())
 	{
-		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), 0);
+		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), TCHAR_TO_UTF8(*Value));
 	}
 }
 
@@ -96,6 +96,46 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithIntValue(FString Name, FStr
 	if (GetFirebaseProvider())
 	{
 		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
+	}
+}
+
+void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialBegin(FString Name)
+{
+	if (GetFirebaseProvider())
+	{
+		::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialBegin);
+	}
+}
+
+void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialEnd(FString Name)
+{
+	if (GetFirebaseProvider())
+	{
+		::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialComplete);
+	}
+}
+
+void UFirebaseAnalyticsBPLib::RecordFirebaseUnlockAchievement(FString AchievementID, int32 Value)
+{
+	if (GetFirebaseProvider())
+	{
+		::firebase::analytics::LogEvent(::firebase::analytics::kEventUnlockAchievement, TCHAR_TO_UTF8(*AchievementID), Value);
+	}
+}
+
+void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value)
+{
+	if (GetFirebaseProvider()) 
+	{
+		using namespace ::firebase::analytics;
+
+		const firebase::analytics::Parameter kSelectContentParameters[] = {
+		Parameter(kParameterItemName, TCHAR_TO_UTF8(*ItemName)),
+		Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
+		Parameter(kParameterValue, Value)
+		};
+
+		LogEvent(kEventSelectContent, kSelectContentParameters, 2);
 	}
 }
 

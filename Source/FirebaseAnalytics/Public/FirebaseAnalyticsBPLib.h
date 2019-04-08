@@ -36,11 +36,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEvent(FString Name);
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithParamName(FString Name, FString ParameterName);
+		static void RecordFirebaseEventWithParamName(FString Name, FString ParameterName, FString Value);
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEventWithFloatValue(FString Name, FString ParameterName, float Value);
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEventWithIntValue(FString Name, FString ParameterName, int32 Value);
+
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
+		static void RecordFirebaseTutorialBegin(FString Name);
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
+		static void RecordFirebaseTutorialEnd(FString Name);
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
+		static void RecordFirebaseUnlockAchievement(FString AchievementID, int32 Value);
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
+		static void RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value);
+
 
 	static FFirebaseAnalyticsProvider* GetFirebaseProvider();
 };
