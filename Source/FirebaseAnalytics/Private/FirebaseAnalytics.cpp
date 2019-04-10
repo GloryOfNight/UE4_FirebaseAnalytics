@@ -3,7 +3,6 @@
 #include "FirebaseAnalytics.h"
 #include "Core.h"
 #include "Modules/ModuleManager.h"
-#include "Interfaces/IPluginManager.h"
 #include "Interfaces/IAnalyticsProvider.h"
 #include "../Public/FirebaseAnalyticsProvider.h"
 

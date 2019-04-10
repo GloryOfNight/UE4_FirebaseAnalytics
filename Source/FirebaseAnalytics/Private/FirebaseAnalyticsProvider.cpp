@@ -12,20 +12,31 @@ FFirebaseAnalyticsProvider::FFirebaseAnalyticsProvider()
 
 bool FFirebaseAnalyticsProvider::StartSession(const TArray<FAnalyticsEventAttribute>& Attributes)
 {
-	if (!FirebaseAnalyticsStarted)
+	if (!firebase::App::GetInstance())
 	{
+		::firebase::App* firebaseAnalyticsApp = nullptr;
+
 #if PLATFORM_ANDROID
 		firebaseAnalyticsApp = ::firebase::App::Create(::firebase::AppOptions(), FAndroidApplication::GetJavaEnv(), FJavaWrapper::GameActivityThis);
 #elif PLATFORM_IOS
 		firebaseAnalyticsApp = ::firebase::App::Create(::firebase::AppOptions());
 #else
-		UE_LOG(LogTemp, Warning, TEXT("Firebase analytics cannot start on this platform"));
-#endif
+		// Firebase support only Android & iOS platform,
+		// but in need make debug easier we creating fake options so firebase can create an app
+		::firebase::AppOptions Options;
+		Options.set_api_key("Empty");
+		Options.set_app_id("Empty");
+		Options.set_database_url("Empty");
+		Options.set_ga_tracking_id("Empty");
+		Options.set_messaging_sender_id("Empty");
+		Options.set_project_id("Empty");
+		Options.set_storage_bucket("Empty");
 
+		firebaseAnalyticsApp = ::firebase::App::Create(Options);
+#endif
 		if (firebaseAnalyticsApp)
 		{
 			::firebase::analytics::Initialize(*firebaseAnalyticsApp);
-			FirebaseAnalyticsStarted = true;
 			return true;
 		}
 	}
@@ -34,7 +45,10 @@ bool FFirebaseAnalyticsProvider::StartSession(const TArray<FAnalyticsEventAttrib
 
 void FFirebaseAnalyticsProvider::RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes) 
 {
-	::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*EventName));
+	if (::firebase::App::GetInstance()) 
+	{
+		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*EventName));
+	}
 }
 
 FString FFirebaseAnalyticsProvider::GetSessionID() const
@@ -68,14 +82,14 @@ FString FFirebaseAnalyticsProvider::GetUserID() const
 
 void FFirebaseAnalyticsProvider::EndSession()
 {
-	if (FirebaseAnalyticsStarted) 
+	if (::firebase::App::GetInstance())
 	{
 		::firebase::analytics::Terminate();
-		FirebaseAnalyticsStarted = false;
+		firebase::App::GetInstance()->~App();
 	}
 }
 
 FFirebaseAnalyticsProvider::~FFirebaseAnalyticsProvider()
 {
-	EndSession();
+	
 }

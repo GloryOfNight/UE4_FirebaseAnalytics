@@ -9,7 +9,7 @@ public class FirebaseAnalytics : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
-		PublicDependencyModuleNames.AddRange(new string[]{"Core", "CoreUObject", "ApplicationCore",  "Projects", "Analytics"});
+		PublicDependencyModuleNames.AddRange(new string[]{"Core", "CoreUObject", "Engine" , "Analytics"});
 
         PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/include/")));
 
@@ -22,7 +22,7 @@ public class FirebaseAnalytics : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            PublicDependencyModuleNames.AddRange(new string[] { "Launch" });  
+            PublicDependencyModuleNames.AddRange(new string[] { "Launch", "ApplicationCore" });  
 
             PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_app.a")));
             PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_analytics.a")));

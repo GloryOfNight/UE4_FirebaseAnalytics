@@ -13,7 +13,7 @@ void UFirebaseAnalyticsBPLib::EndFirebaseSession()
 
 void UFirebaseAnalyticsBPLib::SetFirebaseUserId(const FString ValueToSet)
 {
-	if (GetFirebaseProvider()) 
+	if (CanLogEvents()) 
 	{
 		::firebase::analytics::SetUserId(TCHAR_TO_UTF8(*ValueToSet));
 	}
@@ -21,7 +21,7 @@ void UFirebaseAnalyticsBPLib::SetFirebaseUserId(const FString ValueToSet)
 
 void UFirebaseAnalyticsBPLib::SetFirebaseUserProperty(const FString Name, const FString Property)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::SetUserProperty(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*Property));
 	}
@@ -29,7 +29,7 @@ void UFirebaseAnalyticsBPLib::SetFirebaseUserProperty(const FString Name, const 
 
 void UFirebaseAnalyticsBPLib::SetFirebaseMinimumSessionDuration(const int32 Seconds)
 {
-	if (GetFirebaseProvider()) 
+	if (CanLogEvents()) 
 	{
 		::firebase::analytics::SetMinimumSessionDuration(static_cast<int64_t>(Seconds * 1000));
 	}
@@ -37,7 +37,7 @@ void UFirebaseAnalyticsBPLib::SetFirebaseMinimumSessionDuration(const int32 Seco
 
 void UFirebaseAnalyticsBPLib::SetFirebaseTimeoutSessionDuration(const int32 Seconds)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::SetSessionTimeoutDuration(static_cast<int64_t>(Seconds * 1000));
 	}
@@ -45,7 +45,7 @@ void UFirebaseAnalyticsBPLib::SetFirebaseTimeoutSessionDuration(const int32 Seco
 
 void UFirebaseAnalyticsBPLib::SetAnalyticsCollectionEnabled(const bool IsEnabled)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::SetAnalyticsCollectionEnabled(IsEnabled);
 	}
@@ -53,15 +53,15 @@ void UFirebaseAnalyticsBPLib::SetAnalyticsCollectionEnabled(const bool IsEnabled
 
 void UFirebaseAnalyticsBPLib::ResetFirebaseAnalyticsData()
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::ResetAnalyticsData();
 	}
 }
 
-void UFirebaseAnalyticsBPLib::SetFirebaseCurrentScreen(const FString ScreenName, const FString ScreenClass)
+void UFirebaseAnalyticsBPLib::SetFirebaseCurrentScreen(FString ScreenName, FString ScreenClass)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::SetCurrentScreen(TCHAR_TO_UTF8(*ScreenName), TCHAR_TO_UTF8(*ScreenClass));
 	}
@@ -69,7 +69,7 @@ void UFirebaseAnalyticsBPLib::SetFirebaseCurrentScreen(const FString ScreenName,
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEvent(FString Name)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name));
 	}
@@ -77,7 +77,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEvent(FString Name)
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParamName(FString Name, FString ParameterName, FString Value)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), TCHAR_TO_UTF8(*Value));
 	}
@@ -85,7 +85,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParamName(FString Name, FSt
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithFloatValue(FString Name, FString ParameterName, float Value)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
 	}
@@ -93,7 +93,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithFloatValue(FString Name, FS
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithIntValue(FString Name, FString ParameterName, int32 Value)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
 	}
@@ -101,7 +101,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithIntValue(FString Name, FStr
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialBegin(FString Name)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialBegin);
 	}
@@ -109,7 +109,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialBegin(FString Name)
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialEnd(FString Name)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialComplete);
 	}
@@ -117,7 +117,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialEnd(FString Name)
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseUnlockAchievement(FString AchievementID, int32 Value)
 {
-	if (GetFirebaseProvider())
+	if (CanLogEvents())
 	{
 		::firebase::analytics::LogEvent(::firebase::analytics::kEventUnlockAchievement, TCHAR_TO_UTF8(*AchievementID), Value);
 	}
@@ -125,7 +125,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseUnlockAchievement(FString Achievemen
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value)
 {
-	if (GetFirebaseProvider()) 
+	if (CanLogEvents()) 
 	{
 		using namespace ::firebase::analytics;
 
@@ -139,7 +139,9 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 	}
 }
 
-FFirebaseAnalyticsProvider* UFirebaseAnalyticsBPLib::GetFirebaseProvider() 
+bool UFirebaseAnalyticsBPLib::CanLogEvents() 
 {
-	return static_cast<FFirebaseAnalyticsProvider*>(FAnalytics::Get().GetDefaultConfiguredProvider().Get());
+	const auto provider = static_cast<FFirebaseAnalyticsProvider*>(FAnalytics::Get().GetDefaultConfiguredProvider().Get());
+
+	return provider && ::firebase::App::GetInstance();
 }

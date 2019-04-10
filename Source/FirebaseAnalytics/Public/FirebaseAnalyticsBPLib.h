@@ -1,10 +1,11 @@
 #pragma once
 #include "Core.h"
 #include "FirebaseAnalytics.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "FirebaseAnalyticsBPLIb.generated.h"
 
 UCLASS()
-class FIREBASEANALYTICS_API UFirebaseAnalyticsBPLib : public UObject 
+class FIREBASEANALYTICS_API UFirebaseAnalyticsBPLib : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 
@@ -32,7 +33,7 @@ public:
 
 	/** Sets the current screen name and screen class, which specifies the current visual context in your app. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics")
-		static void SetFirebaseCurrentScreen(const FString ScreenName, const FString ScreenClass);
+		static void SetFirebaseCurrentScreen(FString ScreenName, FString ScreenClass);
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEvent(FString Name);
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
@@ -52,5 +53,5 @@ public:
 		static void RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value);
 
 
-	static FFirebaseAnalyticsProvider* GetFirebaseProvider();
+	static bool CanLogEvents();
 };

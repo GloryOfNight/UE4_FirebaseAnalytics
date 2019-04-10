@@ -6,12 +6,12 @@
 #include "../../ThirdParty/firebase_cpp_sdk/include/firebase/analytics/parameter_names.h"
 #include "../../ThirdParty/firebase_cpp_sdk/include/firebase/analytics/user_property_names.h"
 
+
 class FFirebaseAnalyticsProvider : public IAnalyticsProvider
 {
 	
 	 
 public:
-	bool FirebaseAnalyticsStarted = false;
 
 	FFirebaseAnalyticsProvider();
 
@@ -32,8 +32,5 @@ public:
 	virtual FString GetUserID() const override;
 
 	~FFirebaseAnalyticsProvider();
-
-private:
-	::firebase::App* firebaseAnalyticsApp = nullptr;
 };
 
