@@ -52,6 +52,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value);
 
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
+		static void RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param, int32 Value = 0);
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
+		static void RecordFirebaseEventWithParameters(FString Category, const TMap<FString, FString> ParamMap, int32 Value = 0);
 
 	static bool CanLogEvents();
 };

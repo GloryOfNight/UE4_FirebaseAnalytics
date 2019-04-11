@@ -35,5 +35,15 @@ public class FirebaseAnalytics : ModuleRules
 
             AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "FirebaseAnalyticsAndroid_UPL.xml"));
         }
+        else if (Target.Platform == UnrealTargetPlatform.IOS)
+        {
+            string ioslibpath = "../ThirdParty/firebase_cpp_sdk/libs/ios/";
+
+            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, ioslibpath + "armv7"));
+            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, ioslibpath + "arm64"));
+
+            PublicAdditionalLibraries.Add("firebase_app");
+            PublicAdditionalLibraries.Add("firebase_analytics");
+        }
     }
 }

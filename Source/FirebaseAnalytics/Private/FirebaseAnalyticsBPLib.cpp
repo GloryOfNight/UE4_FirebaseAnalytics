@@ -135,11 +135,55 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 		Parameter(kParameterValue, Value)
 		};
 
-		LogEvent(kEventSelectContent, kSelectContentParameters, 2);
+		LogEvent(kEventSelectContent, kSelectContentParameters, Value);
 	}
 }
 
-bool UFirebaseAnalyticsBPLib::CanLogEvents() 
+void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param, int32 Value)
+{
+	if (CanLogEvents()) 
+	{
+		using namespace ::firebase::analytics;
+
+		const Parameter kSelectContentParameters[] = 
+		{
+		Parameter(TCHAR_TO_UTF8(*ParamName), TCHAR_TO_UTF8(*Param))
+		};
+		
+		LogEvent(TCHAR_TO_UTF8(*Category), kSelectContentParameters, Value);
+	}
+}
+
+void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, const TMap<FString, FString> ParamMap, int32 Value) 
+{
+	const int paramnum = ParamMap.Num();
+
+	if (paramnum > 0 && CanLogEvents()) 
+	{
+		using namespace ::firebase::analytics;
+
+		Parameter* kParameters = new Parameter[paramnum];
+
+		TArray<FString> MapKeys;
+			ParamMap.GenerateKeyArray(MapKeys);
+		TArray<FString> MapValues;
+			ParamMap.GenerateValueArray(MapValues);
+
+		for (uint16 i = 0; i < MapKeys.Num(); i++) 
+		{
+			const auto key = MapKeys[i];
+			const auto value = MapValues[i];
+
+			kParameters[0] = Parameter(TCHAR_TO_UTF8(*key), TCHAR_TO_UTF8(*value));
+		}
+
+		LogEvent(TCHAR_TO_UTF8(*Category), kParameters, Value);
+
+		delete[] kParameters;
+	}
+}
+
+bool UFirebaseAnalyticsBPLib::CanLogEvents()
 {
 	const auto provider = static_cast<FFirebaseAnalyticsProvider*>(FAnalytics::Get().GetDefaultConfiguredProvider().Get());
 
