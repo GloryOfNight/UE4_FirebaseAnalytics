@@ -53,9 +53,9 @@ public:
 		static void RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value);
 
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param, int32 Value = 0);
+		static void RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param);
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithParameters(FString Category, const TMap<FString, FString> ParamMap, int32 Value = 0);
+		static void RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> ParamMap);
 
 	static bool CanLogEvents();
 };

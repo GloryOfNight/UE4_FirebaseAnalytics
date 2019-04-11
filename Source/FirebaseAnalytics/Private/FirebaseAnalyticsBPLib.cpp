@@ -129,32 +129,30 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 	{
 		using namespace ::firebase::analytics;
 
-		const firebase::analytics::Parameter kSelectContentParameters[] = {
+		const firebase::analytics::Parameter kParameters[] = {
 		Parameter(kParameterItemName, TCHAR_TO_UTF8(*ItemName)),
 		Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
 		Parameter(kParameterValue, Value)
 		};
 
-		LogEvent(kEventSelectContent, kSelectContentParameters, Value);
+		LogEvent(kEventSelectContent, kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
 	}
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param, int32 Value)
+void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param)
 {
 	if (CanLogEvents()) 
 	{
-		using namespace ::firebase::analytics;
-
-		const Parameter kSelectContentParameters[] = 
+		const ::firebase::analytics::Parameter kParameters[] =
 		{
-		Parameter(TCHAR_TO_UTF8(*ParamName), TCHAR_TO_UTF8(*Param))
+		::firebase::analytics::Parameter(TCHAR_TO_UTF8(*ParamName), TCHAR_TO_UTF8(*Param))
 		};
 		
-		LogEvent(TCHAR_TO_UTF8(*Category), kSelectContentParameters, Value);
+		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Category), kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
 	}
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, const TMap<FString, FString> ParamMap, int32 Value) 
+void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> ParamMap) 
 {
 	const int paramnum = ParamMap.Num();
 
@@ -177,7 +175,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category
 			kParameters[0] = Parameter(TCHAR_TO_UTF8(*key), TCHAR_TO_UTF8(*value));
 		}
 
-		LogEvent(TCHAR_TO_UTF8(*Category), kParameters, Value);
+		LogEvent(TCHAR_TO_UTF8(*Category), kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
 
 		delete[] kParameters;
 	}
