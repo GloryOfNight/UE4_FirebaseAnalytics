@@ -20,6 +20,16 @@ public class FirebaseAnalytics : ModuleRules
             PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/windows/", PlatformName,"firebase_app.lib")));
             PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/windows/", PlatformName, "firebase_analytics.lib")));
         }
+        else if (Target.Platform == UnrealTargetPlatform.Linux)
+        {
+            string linuxlibpath = "../ThirdParty/firebase_cpp_sdk/libs/linux/";
+
+            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, linuxlibpath + "i386"));
+            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, linuxlibpath + "x86_64"));
+
+            PublicAdditionalLibraries.Add("firebase_app");
+            PublicAdditionalLibraries.Add("firebase_analytics");
+        }
         else if (Target.Platform == UnrealTargetPlatform.Android)
         {
             PublicDependencyModuleNames.AddRange(new string[] { "Launch", "ApplicationCore" });

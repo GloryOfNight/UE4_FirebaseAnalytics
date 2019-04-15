@@ -143,12 +143,11 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParam(FString Category, FSt
 {
 	if (CanLogEvents()) 
 	{
-		const ::firebase::analytics::Parameter kParameters[] =
-		{
-		::firebase::analytics::Parameter(TCHAR_TO_UTF8(*ParamName), TCHAR_TO_UTF8(*Param))
-		};
+		using namespace ::firebase::analytics;
 		
-		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Category), kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
+		const Parameter kParameter[] = { Parameter(TCHAR_TO_UTF8(*ParamName), TCHAR_TO_UTF8(*Param)) };
+
+		LogEvent(TCHAR_TO_UTF8(*Category), kParameter, 1);
 	}
 }
 
@@ -171,8 +170,7 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category
 		{
 			const auto key = MapKeys[i];
 			const auto value = MapValues[i];
-
-			kParameters[0] = Parameter(TCHAR_TO_UTF8(*key), TCHAR_TO_UTF8(*value));
+			kParameters[i] = Parameter(TCHAR_TO_UTF8(*key), TCHAR_TO_UTF8(*value));
 		}
 
 		LogEvent(TCHAR_TO_UTF8(*Category), kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
