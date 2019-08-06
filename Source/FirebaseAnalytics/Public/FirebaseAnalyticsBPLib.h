@@ -16,46 +16,44 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void EndFirebaseSession();
 
+	/** Sets the user ID property. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void SetFirebaseUserId(const FString ValueToSet);
+	/** Set a user property to the given value. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void SetFirebaseUserProperty(const FString Name, const FString Property);
-	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
-		static void SetFirebaseMinimumSessionDuration(const int32 Seconds);
+	/* Sets the duration of inactivity that terminates the current session. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void SetFirebaseTimeoutSessionDuration(const int32 Seconds);
 	/** Sets whether analytics collection is enabled for this app on this device. */
-	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics")
-		static void SetAnalyticsCollectionEnabled(const bool IsEnabled = true);
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
+		static void SetFirebaseAnalyticsCollectionEnabled(const bool IsEnabled = true);
 	/** Clears all analytics data for this app from the device and resets the app instance id.  */
-	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics")
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void ResetFirebaseAnalyticsData();
-
 	/** Sets the current screen name and screen class, which specifies the current visual context in your app. */
-	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics")
+	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void SetFirebaseCurrentScreen(FString ScreenName, FString ScreenClass);
+	/** Log an event with no parameters. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEvent(FString Name);
+	/** Log an event with one string parameter. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithParamName(FString Name, FString ParameterName, FString Value);
+		static void RecordEventWithStringParameter(FString Name, FString ParameterName, FString Parameter);
+	/** Log an event with one float parameter. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithFloatValue(FString Name, FString ParameterName, float Value);
+		static void RecordEventWithFloatParameter(FString Name, FString ParameterName, float Parameter);
+	/** Log an event with one 32-bit integer parameter. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithIntValue(FString Name, FString ParameterName, int32 Value);
+		static void RecordEventWithIntParameter(FString Name, FString ParameterName, int32 Parameter);
 
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseTutorialBegin(FString Name);
+		static void RecordFirebaseTutorialBegin();
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseTutorialEnd(FString Name);
-	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseUnlockAchievement(FString AchievementID, int32 Value);
+		static void RecordFirebaseTutorialEnd();
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value);
 
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
-		static void RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param);
-	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> ParamMap);
-
-	static bool CanLogEvents();
 };

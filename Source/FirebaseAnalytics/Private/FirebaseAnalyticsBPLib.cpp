@@ -13,149 +13,83 @@ void UFirebaseAnalyticsBPLib::EndFirebaseSession()
 
 void UFirebaseAnalyticsBPLib::SetFirebaseUserId(const FString ValueToSet)
 {
-	if (CanLogEvents()) 
-	{
-		::firebase::analytics::SetUserId(TCHAR_TO_UTF8(*ValueToSet));
-	}
+
+	::firebase::analytics::SetUserId(TCHAR_TO_UTF8(*ValueToSet));
 }
 
 void UFirebaseAnalyticsBPLib::SetFirebaseUserProperty(const FString Name, const FString Property)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::SetUserProperty(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*Property));
-	}
-}
-
-void UFirebaseAnalyticsBPLib::SetFirebaseMinimumSessionDuration(const int32 Seconds)
-{
-	if (CanLogEvents()) 
-	{
-		::firebase::analytics::SetMinimumSessionDuration(static_cast<int64_t>(Seconds * 1000));
-	}
+	::firebase::analytics::SetUserProperty(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*Property));
 }
 
 void UFirebaseAnalyticsBPLib::SetFirebaseTimeoutSessionDuration(const int32 Seconds)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::SetSessionTimeoutDuration(static_cast<int64_t>(Seconds * 1000));
-	}
+	::firebase::analytics::SetSessionTimeoutDuration(static_cast<int64_t>(Seconds * 1000));
 }
 
-void UFirebaseAnalyticsBPLib::SetAnalyticsCollectionEnabled(const bool IsEnabled)
+void UFirebaseAnalyticsBPLib::SetFirebaseAnalyticsCollectionEnabled(const bool IsEnabled)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::SetAnalyticsCollectionEnabled(IsEnabled);
-	}
+	::firebase::analytics::SetAnalyticsCollectionEnabled(IsEnabled);
 }
 
 void UFirebaseAnalyticsBPLib::ResetFirebaseAnalyticsData()
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::ResetAnalyticsData();
-	}
+	::firebase::analytics::ResetAnalyticsData();
 }
 
 void UFirebaseAnalyticsBPLib::SetFirebaseCurrentScreen(FString ScreenName, FString ScreenClass)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::SetCurrentScreen(TCHAR_TO_UTF8(*ScreenName), TCHAR_TO_UTF8(*ScreenClass));
-	}
+	::firebase::analytics::SetCurrentScreen(TCHAR_TO_UTF8(*ScreenName), TCHAR_TO_UTF8(*ScreenClass));
 }
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEvent(FString Name)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name));
-	}
+	::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name));
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParamName(FString Name, FString ParameterName, FString Value)
+void UFirebaseAnalyticsBPLib::RecordEventWithStringParameter(FString Name, FString ParameterName, FString Value)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), TCHAR_TO_UTF8(*Value));
-	}
+	::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), TCHAR_TO_UTF8(*Value));
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithFloatValue(FString Name, FString ParameterName, float Value)
+void UFirebaseAnalyticsBPLib::RecordEventWithFloatParameter(FString Name, FString ParameterName, float Value)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
-	}
+	::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithIntValue(FString Name, FString ParameterName, int32 Value)
+void UFirebaseAnalyticsBPLib::RecordEventWithIntParameter(FString Name, FString ParameterName, int32 Value)
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
-	}
+	::firebase::analytics::LogEvent(TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*ParameterName), Value);
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialBegin(FString Name)
+void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialBegin()
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialBegin);
-	}
+	::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialBegin);
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialEnd(FString Name)
+void UFirebaseAnalyticsBPLib::RecordFirebaseTutorialEnd()
 {
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialComplete);
-	}
-}
-
-void UFirebaseAnalyticsBPLib::RecordFirebaseUnlockAchievement(FString AchievementID, int32 Value)
-{
-	if (CanLogEvents())
-	{
-		::firebase::analytics::LogEvent(::firebase::analytics::kEventUnlockAchievement, TCHAR_TO_UTF8(*AchievementID), Value);
-	}
+	::firebase::analytics::LogEvent(::firebase::analytics::kEventTutorialComplete);
 }
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value)
 {
-	if (CanLogEvents()) 
-	{
-		using namespace ::firebase::analytics;
+	using namespace ::firebase::analytics;
 
-		const firebase::analytics::Parameter kParameters[] = {
-		Parameter(kParameterItemName, TCHAR_TO_UTF8(*ItemName)),
-		Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
-		Parameter(kParameterValue, Value)
-		};
+	const firebase::analytics::Parameter kParameters[] = {
+	Parameter(kParameterItemName, TCHAR_TO_UTF8(*ItemName)),
+	Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
+	Parameter(kParameterValue, Value)
+	};
 
-		LogEvent(kEventSelectContent, kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
-	}
-}
-
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParam(FString Category, FString ParamName, FString Param)
-{
-	if (CanLogEvents()) 
-	{
-		using namespace ::firebase::analytics;
-		
-		const Parameter kParameter[] = { Parameter(TCHAR_TO_UTF8(*ParamName), TCHAR_TO_UTF8(*Param)) };
-
-		LogEvent(TCHAR_TO_UTF8(*Category), kParameter, 1);
-	}
+	LogEvent(kEventSelectContent, kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
 }
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> ParamMap) 
 {
 	const int paramnum = ParamMap.Num();
 
-	if (paramnum > 0 && CanLogEvents()) 
+	if (paramnum > 0) 
 	{
 		using namespace ::firebase::analytics;
 
@@ -177,11 +111,4 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category
 
 		delete[] kParameters;
 	}
-}
-
-bool UFirebaseAnalyticsBPLib::CanLogEvents()
-{
-	const auto provider = static_cast<FFirebaseAnalyticsProvider*>(FAnalytics::Get().GetDefaultConfiguredProvider().Get());
-
-	return provider && ::firebase::App::GetInstance();
 }

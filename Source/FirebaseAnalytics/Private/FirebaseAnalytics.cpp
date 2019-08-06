@@ -10,7 +10,7 @@
 
 void FFirebaseAnalytics::StartupModule()
 {
-	
+	FirebaseAnalyticsProvider = MakeShareable(new FFirebaseAnalyticsProvider());
 }
 
 void FFirebaseAnalytics::ShutdownModule()
@@ -20,8 +20,7 @@ void FFirebaseAnalytics::ShutdownModule()
 
 TSharedPtr<IAnalyticsProvider> FFirebaseAnalytics::CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate & GetConfigValue) const
 {
-	return GetConfigValue.IsBound() ?
-		MakeShareable(new FFirebaseAnalyticsProvider()) : nullptr;
+	return FirebaseAnalyticsProvider;
 }
 
 #undef LOCTEXT_NAMESPACE

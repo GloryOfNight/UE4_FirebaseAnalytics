@@ -7,6 +7,12 @@
 
 class FFirebaseAnalytics : public IAnalyticsProviderModule
 {
+public:
+	/** Singleton for analytics */
+	TSharedPtr<IAnalyticsProvider> FirebaseAnalyticsProvider;
+
+private:
+
 	static inline FFirebaseAnalytics& Get()
 	{
 		return FModuleManager::LoadModuleChecked< FFirebaseAnalytics >("FirebaseAnalytics");

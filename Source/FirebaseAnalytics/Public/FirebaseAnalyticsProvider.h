@@ -8,11 +8,8 @@
 
 
 class FFirebaseAnalyticsProvider : public IAnalyticsProvider
-{
-	
-	 
+{ 
 public:
-
 	FFirebaseAnalyticsProvider();
 
 	virtual bool StartSession(const TArray<FAnalyticsEventAttribute>& Attributes) override;
