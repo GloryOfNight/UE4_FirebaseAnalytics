@@ -23,14 +23,14 @@ Now you're free to use plugin.
 1. Get into Firebase console & create project
 2. Download google-services.json file
 3. Place google-services.json into folder <projectdir>/Build/Android/gradle/app/ 
-n4. Select plugin usage to true in Plugin Browser and try to build Android. If there no issues, project will build&run without any errors. 
+4. Select plugin usage to true in Plugin Browser and try to build Android. If there no issues, project will build&run without any errors. 
 Please report any issues to Issues section
 
 # Additional setup for C++ usage
 1. Open you're IDE
 2. Open <projectname>.build.cs file 
 3. Add "FirebaseAnalytics" to public module dependency list. 
-4. Add "FirebaseAnalyticsBPLib.h" to any project code files and check build for build errors. 
+4. Include "FirebaseAnalyticsBPLib.h" to any project code files and check build for build errors. 
 
 # Support & additional info
 Feel free to do PR into this repository. Also feel free to use this plugin in you're own developer needs.
