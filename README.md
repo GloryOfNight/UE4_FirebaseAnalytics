@@ -1,5 +1,5 @@
 # UE4_FirebaseAnalytics
-Free open source Firebase analytics provider for Unreal Engine 4. 
+Firebase analytics provider for Unreal Engine 4. 
 
 # Imrpotant notes: 
 Plugin currently support only Android target platfrom, iOS support still in develop.
