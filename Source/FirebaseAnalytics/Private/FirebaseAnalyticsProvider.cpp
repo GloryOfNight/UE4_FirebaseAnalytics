@@ -7,17 +7,14 @@
 
 FFirebaseAnalyticsProvider::FFirebaseAnalyticsProvider()
 {
-
 }
 
 bool FFirebaseAnalyticsProvider::StartSession(const TArray<FAnalyticsEventAttribute>& Attributes)
 {
-	::firebase::App* firebaseApp = nullptr;
-
 #if PLATFORM_ANDROID
-	firebaseApp = ::firebase::App::Create(::firebase::AppOptions(), FAndroidApplication::GetJavaEnv(), FJavaWrapper::GameActivityThis);
+	FirebaseApp = ::firebase::App::Create(::firebase::AppOptions(), FAndroidApplication::GetJavaEnv(), FJavaWrapper::GameActivityThis);
 #elif PLATFORM_IOS
-	firebaseApp = ::firebase::App::Create(::firebase::AppOptions());
+	FirebaseApp = ::firebase::App::Create(::firebase::AppOptions());
 #else
 
 	// Firebase support only Android & iOS platform,
@@ -31,17 +28,17 @@ bool FFirebaseAnalyticsProvider::StartSession(const TArray<FAnalyticsEventAttrib
 	Options.set_project_id("Empty");
 	Options.set_storage_bucket("Empty");
 
-	firebaseApp = ::firebase::App::Create(Options);
+	FirebaseApp = ::firebase::App::Create(Options);
 #endif
 
-	if (firebaseApp)
+	if (FirebaseApp)
 	{
-		::firebase::analytics::Initialize(*firebaseApp);
+		::firebase::analytics::Initialize(*FirebaseApp);
 		::firebase::analytics::SetAnalyticsCollectionEnabled(true);
 		::firebase::analytics::SetSessionTimeoutDuration(1000 * 60 * 30);
 	}
 
-	return firebaseApp != nullptr;
+	return FirebaseApp != nullptr;
 }
 
 void FFirebaseAnalyticsProvider::RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes) 
@@ -86,14 +83,13 @@ FString FFirebaseAnalyticsProvider::GetUserID() const
 
 void FFirebaseAnalyticsProvider::EndSession()
 {
-	if (::firebase::App::GetInstance())
+	if (FirebaseApp)
 	{
 		::firebase::analytics::Terminate();
-		delete ::firebase::App::GetInstance();
+		delete FirebaseApp;
 	}
 }
 
 FFirebaseAnalyticsProvider::~FFirebaseAnalyticsProvider()
 {
-
 }

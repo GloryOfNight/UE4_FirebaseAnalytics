@@ -76,7 +76,8 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 {
 	using namespace ::firebase::analytics;
 
-	const firebase::analytics::Parameter kParameters[] = {
+	const Parameter kParameters[] = 
+	{
 	Parameter(kParameterItemName, TCHAR_TO_UTF8(*ItemName)),
 	Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
 	Parameter(kParameterValue, Value)
@@ -85,29 +86,23 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 	LogEvent(kEventSelectContent, kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
 }
 
-void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> ParamMap) 
+void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> Params) 
 {
-	const int paramnum = ParamMap.Num();
+	using namespace ::firebase::analytics;
 
-	if (paramnum > 0) 
+	const int32 TotalParams = Params.Num();
+	if (TotalParams > 0) 
 	{
-		using namespace ::firebase::analytics;
+		Parameter* kParameters = new Parameter[TotalParams];
 
-		Parameter* kParameters = new Parameter[paramnum];
-
-		TArray<FString> MapKeys;
-			ParamMap.GenerateKeyArray(MapKeys);
-		TArray<FString> MapValues;
-			ParamMap.GenerateValueArray(MapValues);
-
-		for (uint16 i = 0; i < MapKeys.Num(); i++) 
+		int32 counter = 0;
+		for (const auto& i : Params) 
 		{
-			const auto key = MapKeys[i];
-			const auto value = MapValues[i];
-			kParameters[i] = Parameter(TCHAR_TO_UTF8(*key), TCHAR_TO_UTF8(*value));
+			kParameters[counter] = Parameter(TCHAR_TO_UTF8(*i.Key), TCHAR_TO_UTF8(*i.Value));
+			++counter;
 		}
 
-		LogEvent(TCHAR_TO_UTF8(*Category), kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
+		LogEvent(TCHAR_TO_UTF8(*Category), kParameters, static_cast<size_t>(TotalParams));
 
 		delete[] kParameters;
 	}

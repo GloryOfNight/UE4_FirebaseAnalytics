@@ -24,8 +24,8 @@ public class FirebaseAnalytics : ModuleRules
         {
             string linuxlibpath = "../ThirdParty/firebase_cpp_sdk/libs/linux/";
 
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, linuxlibpath + "i386"));
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, linuxlibpath + "x86_64"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, linuxlibpath + "i386"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, linuxlibpath + "x86_64"));
 
             PublicAdditionalLibraries.Add("firebase_app");
             PublicAdditionalLibraries.Add("firebase_analytics");
@@ -36,9 +36,9 @@ public class FirebaseAnalytics : ModuleRules
 
             string androidlibpath = "../ThirdParty/firebase_cpp_sdk/libs/android/";
 
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, androidlibpath + "armeabi-v7a"));
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, androidlibpath + "arm64-v8a"));
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, androidlibpath + "x86"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, androidlibpath + "armeabi-v7a"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, androidlibpath + "arm64-v8a"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, androidlibpath + "x86"));
 
             PublicAdditionalLibraries.Add("firebase_app");
             PublicAdditionalLibraries.Add("firebase_analytics");
@@ -49,8 +49,8 @@ public class FirebaseAnalytics : ModuleRules
         {
             string ioslibpath = "../ThirdParty/firebase_cpp_sdk/libs/ios/";
 
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, ioslibpath + "armv7"));
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, ioslibpath + "arm64"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, ioslibpath + "armv7"));
+            PublicSystemLibraryPaths.Add(Path.Combine(ModuleDirectory, ioslibpath + "arm64"));
 
             PublicAdditionalLibraries.Add("firebase_app");
             PublicAdditionalLibraries.Add("firebase_analytics");

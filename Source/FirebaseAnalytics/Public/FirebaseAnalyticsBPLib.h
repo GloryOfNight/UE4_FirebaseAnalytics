@@ -22,7 +22,7 @@ public:
 	/** Set a user property to the given value. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void SetFirebaseUserProperty(const FString Name, const FString Property);
-	/* Sets the duration of inactivity that terminates the current session. */
+	/** Sets the duration of inactivity that terminates the current session. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Session")
 		static void SetFirebaseTimeoutSessionDuration(const int32 Seconds);
 	/** Sets whether analytics collection is enabled for this app on this device. */
@@ -46,14 +46,19 @@ public:
 	/** Log an event with one 32-bit integer parameter. */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordEventWithIntParameter(FString Name, FString ParameterName, int32 Parameter);
-
+	/** Log an tutorial begin event */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseTutorialBegin();
+	/** Log an tutorial end event */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseTutorialEnd();
+	/** Log an virtual currency spent event */
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseSpendVirtualCurrency(FString ItemName, FString CurrencyName, int32 Value);
-
+	/**
+	* Log an event with additional parameters 
+	* NOTE: Method uses dynamic memory allocation 
+	*/
 	UFUNCTION(BlueprintCallable, Category = "Firebase | Analytics | Events")
 		static void RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> ParamMap);
 };

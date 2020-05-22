@@ -29,5 +29,8 @@ public:
 	virtual FString GetUserID() const override;
 
 	~FFirebaseAnalyticsProvider();
+
+private:
+	::firebase::App* FirebaseApp{ nullptr };
 };
 
