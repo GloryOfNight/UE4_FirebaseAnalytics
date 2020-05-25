@@ -11,23 +11,21 @@ public class FirebaseAnalytics : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[]{"Core", "CoreUObject", "Engine" , "Analytics"});
 		
 		PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/include/")));
-
+		
 		if (Target.Platform == UnrealTargetPlatform.Win64 || Target.Platform == UnrealTargetPlatform.Win32)
 		{
 			string Arch = Target.Platform == UnrealTargetPlatform.Win64 ? "x64" : "x86";
-
+			
 			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/windows/", Arch,"firebase_app.lib")));
 			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/windows/", Arch, "firebase_analytics.lib")));
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
-			string linuxlibpath = "../ThirdParty/firebase_cpp_sdk/libs/linux/";
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "i386", "libfirebase_app.a")));
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "i386", "libfirebase_analytics.a")));
 
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "i386", "libfirebase_app.a")));
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "i386", "libfirebase_analytics.a")));
-
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "x86_64", "libfirebase_app.a")));
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "x86_64", "libfirebase_analytics.a")));
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "x86_64", "libfirebase_app.a")));
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/linux/", "x86_64", "libfirebase_analytics.a")));
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Android)
 		{
@@ -46,11 +44,11 @@ public class FirebaseAnalytics : ModuleRules
 		}
 		else if (Target.Platform == UnrealTargetPlatform.IOS)
 		{
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "armv7", "libfirebase_app.a")));
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "armv7", "libfirebase_analytics.a")));
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "armv7", "libfirebase_app.a")));
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "armv7", "libfirebase_analytics.a")));
 
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "arm64", "libfirebase_app.a")));
-            PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "arm64", "libfirebase_analytics.a")));
-        }
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "arm64", "libfirebase_app.a")));
+			PublicAdditionalLibraries.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/ios/", "arm64", "libfirebase_analytics.a")));
+		}
 	}
 }
