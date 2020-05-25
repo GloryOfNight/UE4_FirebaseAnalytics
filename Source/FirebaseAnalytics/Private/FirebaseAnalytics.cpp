@@ -16,7 +16,7 @@ void FFirebaseAnalytics::ShutdownModule()
 
 inline FFirebaseAnalytics& FFirebaseAnalytics::Get()
 {
-	return FModuleManager::LoadModuleChecked< FFirebaseAnalytics >("FirebaseAnalytics");
+	return FModuleManager::LoadModuleChecked<FFirebaseAnalytics>("FirebaseAnalytics");
 }
 
 TSharedPtr<IAnalyticsProvider> FFirebaseAnalytics::CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate & GetConfigValue) const

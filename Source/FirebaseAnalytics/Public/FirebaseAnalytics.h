@@ -11,11 +11,11 @@ public:
 
 	virtual void ShutdownModule() override;
 
-	/** Singleton for analytics */
-	TSharedPtr<IAnalyticsProvider> FirebaseAnalyticsProvider;
-
 private:
 	static inline FFirebaseAnalytics& Get();
 
 	virtual TSharedPtr<IAnalyticsProvider> CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate& GetConfigValue) const override;
+
+	/** Singleton for analytics */
+	TSharedPtr<IAnalyticsProvider> FirebaseAnalyticsProvider;
 };
