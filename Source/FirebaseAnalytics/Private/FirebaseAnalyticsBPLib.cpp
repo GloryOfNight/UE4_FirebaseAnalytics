@@ -82,8 +82,9 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 	Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
 	Parameter(kParameterValue, Value)
 	};
+	constexpr size_t paramSize = sizeof(kParameters) / sizeof(kParameters[0]);
 
-	LogEvent(kEventSelectContent, kParameters, sizeof(kParameters) / sizeof(kParameters[0]));
+	LogEvent(kEventSelectContent, kParameters, paramSize);
 }
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> Params) 
