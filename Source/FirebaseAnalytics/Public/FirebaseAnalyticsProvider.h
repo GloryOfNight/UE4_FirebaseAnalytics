@@ -1,11 +1,10 @@
 #pragma once
 #include "Interfaces/IAnalyticsProvider.h"
-#include "../../ThirdParty/firebase_cpp_sdk/include/firebase/app.h"
-#include "../../ThirdParty/firebase_cpp_sdk/include/firebase/analytics.h"
-#include "../../ThirdParty/firebase_cpp_sdk/include/firebase/analytics/event_names.h"
-#include "../../ThirdParty/firebase_cpp_sdk/include/firebase/analytics/parameter_names.h"
-#include "../../ThirdParty/firebase_cpp_sdk/include/firebase/analytics/user_property_names.h"
 
+namespace firebase
+{
+	class App;
+}
 
 class FFirebaseAnalyticsProvider : public IAnalyticsProvider
 { 

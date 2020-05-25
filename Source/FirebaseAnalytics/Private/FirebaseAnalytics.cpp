@@ -1,10 +1,7 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 #include "FirebaseAnalytics.h"
-#include "Core.h"
-#include "Modules/ModuleManager.h"
-#include "Interfaces/IAnalyticsProvider.h"
-#include "../Public/FirebaseAnalyticsProvider.h"
+#include "FirebaseAnalyticsProvider.h"
 
 #define LOCTEXT_NAMESPACE "FFirebaseAnalyticsModule"
 
@@ -15,7 +12,11 @@ void FFirebaseAnalytics::StartupModule()
 
 void FFirebaseAnalytics::ShutdownModule()
 {
+}
 
+inline FFirebaseAnalytics& FFirebaseAnalytics::Get()
+{
+	return FModuleManager::LoadModuleChecked< FFirebaseAnalytics >("FirebaseAnalytics");
 }
 
 TSharedPtr<IAnalyticsProvider> FFirebaseAnalytics::CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate & GetConfigValue) const

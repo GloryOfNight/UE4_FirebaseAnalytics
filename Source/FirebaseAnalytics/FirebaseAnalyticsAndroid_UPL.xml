@@ -3,93 +3,90 @@
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 	<!-- init section is always evaluated once per architecture -->
 	<init>
-		<log text="FireBase init"/>
+		<log text="Firebase Init"/>
 	</init>
   
-  <!-- optional files or directories to copy to Intermediate/Android/APK -->
+  <!-- files or directories to copy to Intermediate/Android/APK -->
   <resourceCopies>
-    <isArch arch="armeabi-v7a">
-      <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_app.a"
-                dst="$S(BuildDir)/libs/armeabi-v7a/libfirebase_app.a" />
-      <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_analytics.a"
-                dst="$S(BuildDir)/libs/armeabi-v7a/libfirebase_analytics.a" />
-    </isArch>
-    <isArch arch="arm64-v8a">
-      <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_app.a"
-                dst="$S(BuildDir)/libs/arm64-v8a/libfirebase_app.a" />
-      <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_analytics.a"
-                dst="$S(BuildDir)/libs/arm64-v8a/libfirebase_analytics.a" />
-    </isArch>
-    <isArch arch="x86">
-      <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_app.a"
-                dst="$S(BuildDir)/libs/x86/libfirebase_app.a" />
-      <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_analytics.a"
-                dst="$S(BuildDir)/libs/x86/libfirebase_analytics.a" />
-    </isArch>
+	<isArch arch="armeabi-v7a">
+	  <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_app.a"
+				dst="$S(BuildDir)/libs/armeabi-v7a/libfirebase_app.a" />
+	  <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/armeabi-v7a/libfirebase_analytics.a"
+				dst="$S(BuildDir)/libs/armeabi-v7a/libfirebase_analytics.a" />
+	</isArch>
+	<isArch arch="arm64-v8a">
+	  <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_app.a"
+				dst="$S(BuildDir)/libs/arm64-v8a/libfirebase_app.a" />
+	  <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/arm64-v8a/libfirebase_analytics.a"
+				dst="$S(BuildDir)/libs/arm64-v8a/libfirebase_analytics.a" />
+	</isArch>
+	<isArch arch="x86">
+	  <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_app.a"
+				dst="$S(BuildDir)/libs/x86/libfirebase_app.a" />
+	  <copyFile src="$S(PluginDir)/../ThirdParty/firebase_cpp_sdk/libs/android/x86/libfirebase_analytics.a"
+				dst="$S(BuildDir)/libs/x86/libfirebase_analytics.a" />
+	</isArch>
   </resourceCopies>
   
 	<!-- AAR dependencies -->
 	<AARImports>
-    
-    <insertValue value="com.google.firebase,firebase-core,11.8.0" />
-    <insertNewline/>
-    
-    <insertValue value="com.google.firebase,firebase-analytics,11.8.0" />
-    <insertNewline/>
+	
+	<insertValue value="com.google.firebase,firebase-core,11.8.0" />
+	<insertNewline/>
+	
+	<insertValue value="com.google.firebase,firebase-analytics,11.8.0" />
+	<insertNewline/>
   
 	</AARImports>
 
-	<!-- optional additions to proguard -->
+	<!-- additions to proguard -->
 	<proguardAdditions>
 		<insert>
+			-keepattributes Signature
+			-keepattributes *Annotation*
+			-keepattributes EnclosingMethod
+			-keepattributes InnerClasses
+			-keep class com.google.android.gms.** { *; }
+			-dontwarn com.google.android.gms.**
 
-      -keepattributes Signature
-      -keepattributes *Annotation*
-      -keepattributes EnclosingMethod
-      -keepattributes InnerClasses
-      -keep class com.google.android.gms.** { *; }
-      -dontwarn com.google.android.gms.**
-
-      #firebase app
-      -keep,includedescriptorclasses public class com.google.android.gms.common.api.PendingResult { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.common.api.Result { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.common.api.ResultCallback { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.common.api.Status { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.common.ConnectionResult { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.common.GoogleApiAvailability { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.common.GoogleApiAvailability{ *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.crash.internal.api.CrashApiImpl { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.tasks.OnFailureListener { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.tasks.OnSuccessListener { *; }
-      -keep,includedescriptorclasses public class com.google.android.gms.tasks.Task { *; }
-      -keep,includedescriptorclasses public class com.google.firebase.FirebaseApp{ *; }
-      -keep,includedescriptorclasses public class com.google.firebase.FirebaseOptions{ *; }
-      -keep,includedescriptorclasses public class com.google.firebase.FirebaseOptions$Builder{ *; }
-      -keep,includedescriptorclasses public class dalvik.system.DexClassLoader{ *; }
-      
-      -keep,includedescriptorclasses public class com.google.firebase.analytics.FirebaseAnalytics{ *; }
-
-    </insert>
+			# firebase
+			-keep,includedescriptorclasses public class com.google.android.gms.common.api.PendingResult { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.common.api.Result { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.common.api.ResultCallback { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.common.api.Status { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.common.ConnectionResult { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.common.GoogleApiAvailability { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.common.GoogleApiAvailability{ *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.crash.internal.api.CrashApiImpl { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.tasks.OnFailureListener { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.tasks.OnSuccessListener { *; }
+			-keep,includedescriptorclasses public class com.google.android.gms.tasks.Task { *; }
+			-keep,includedescriptorclasses public class com.google.firebase.FirebaseApp{ *; }
+			-keep,includedescriptorclasses public class com.google.firebase.FirebaseOptions{ *; }
+			-keep,includedescriptorclasses public class com.google.firebase.FirebaseOptions$Builder{ *; }
+			-keep,includedescriptorclasses public class com.google.firebase.analytics.FirebaseAnalytics{ *; }
+			-keep,includedescriptorclasses public class dalvik.system.DexClassLoader{ *; }
+		</insert>
 	</proguardAdditions>
 
   <buildscriptGradleAdditions>
-    <insert>
-    dependencies 
-    {
-    classpath 'com.google.gms:google-services:3.0.0'
-    }
-    </insert>
+	<insert>
+	dependencies 
+	{
+	classpath 'com.google.gms:google-services:3.0.0'
+	}
+	</insert>
   </buildscriptGradleAdditions>
 
   <buildGradleAdditions>
-    <insert>
-      dependencies
-      {
-      implementation 'com.google.firebase:firebase-core:11.8.0'
-      implementation 'com.google.firebase:firebase-analytics:11.8.0'
-      }
+	<insert>
+	  dependencies
+	  {
+	  implementation 'com.google.firebase:firebase-core:11.8.0'
+	  implementation 'com.google.firebase:firebase-analytics:11.8.0'
+	  }
 
-      apply plugin: 'com.google.gms.google-services'
-    </insert>
+	  apply plugin: 'com.google.gms.google-services'
+	</insert>
   </buildGradleAdditions>	
 </root>

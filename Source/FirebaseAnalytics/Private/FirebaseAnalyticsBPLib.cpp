@@ -1,6 +1,10 @@
-#include "../Public/FirebaseAnalyticsBPLib.h"
-#include "../Public/FirebaseAnalyticsProvider.h"
-#include "Runtime/Analytics/Analytics/Public/Analytics.h"
+#include "FirebaseAnalyticsBPLib.h"
+#include "FirebaseAnalyticsProvider.h"
+#include "Analytics.h"
+#include "firebase/analytics.h"
+#include "firebase/analytics/event_names.h"
+#include "firebase/analytics/parameter_names.h"
+
 bool UFirebaseAnalyticsBPLib::StartFirebaseSession()
 {
 	return FAnalytics::Get().GetDefaultConfiguredProvider()->StartSession();
@@ -13,7 +17,6 @@ void UFirebaseAnalyticsBPLib::EndFirebaseSession()
 
 void UFirebaseAnalyticsBPLib::SetFirebaseUserId(const FString ValueToSet)
 {
-
 	::firebase::analytics::SetUserId(TCHAR_TO_UTF8(*ValueToSet));
 }
 
@@ -82,9 +85,9 @@ void UFirebaseAnalyticsBPLib::RecordFirebaseSpendVirtualCurrency(FString ItemNam
 	Parameter(kParameterVirtualCurrencyName, TCHAR_TO_UTF8(*CurrencyName)),
 	Parameter(kParameterValue, Value)
 	};
-	constexpr size_t paramSize = sizeof(kParameters) / sizeof(kParameters[0]);
+	constexpr size_t ParamSize = sizeof(kParameters) / sizeof(kParameters[0]);
 
-	LogEvent(kEventSelectContent, kParameters, paramSize);
+	LogEvent(kEventSelectContent, kParameters, ParamSize);
 }
 
 void UFirebaseAnalyticsBPLib::RecordFirebaseEventWithParameters(FString Category, TMap<FString, FString> Params) 

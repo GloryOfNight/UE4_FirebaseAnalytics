@@ -1,4 +1,9 @@
-#include "../Public/FirebaseAnalyticsProvider.h"
+#include "FirebaseAnalyticsProvider.h"
+#include "firebase/app.h"
+#include "firebase/analytics.h"
+#include "firebase/analytics/event_names.h"
+#include "firebase/analytics/parameter_names.h"
+#include "firebase/analytics/user_property_names.h"
 
 #if PLATFORM_ANDROID
 #include "Android/AndroidJNI.h"
@@ -6,6 +11,10 @@
 #endif
 
 FFirebaseAnalyticsProvider::FFirebaseAnalyticsProvider()
+{
+}
+
+FFirebaseAnalyticsProvider::~FFirebaseAnalyticsProvider()
 {
 }
 
@@ -51,19 +60,19 @@ void FFirebaseAnalyticsProvider::RecordEvent(const FString& EventName, const TAr
 
 FString FFirebaseAnalyticsProvider::GetSessionID() const
 {
-	// Do nothing
+	// No such thing in firebase, do nothing
 	return "Unsupported";
 }
 
 bool FFirebaseAnalyticsProvider::SetSessionID(const FString & InSessionID)
 {
-	// Do nothing
+	// No such thing in firebase, do nothing
 	return false;
 }
 
 void FFirebaseAnalyticsProvider::FlushEvents()
 {
-	// Do nothing
+	// No such thing in firebase, do nothing
 	return;
 }
 
@@ -77,7 +86,7 @@ void FFirebaseAnalyticsProvider::SetUserID(const FString & InUserID)
 
 FString FFirebaseAnalyticsProvider::GetUserID() const
 {
-	// Do nothing
+	// No such thing in firebase, do nothing
 	return "Unsupported";
 }
 
@@ -88,8 +97,4 @@ void FFirebaseAnalyticsProvider::EndSession()
 		::firebase::analytics::Terminate();
 		delete FirebaseApp;
 	}
-}
-
-FFirebaseAnalyticsProvider::~FFirebaseAnalyticsProvider()
-{
 }
