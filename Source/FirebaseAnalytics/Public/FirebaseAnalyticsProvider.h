@@ -1,35 +1,43 @@
 #pragma once
+#include <vector>
+
+#include "Containers/UnrealString.h"
 #include "Interfaces/IAnalyticsProvider.h"
 
 namespace firebase
 {
 	class App;
-}
+	namespace analytics
+	{
+		struct Parameter;
+	}
+} // namespace firebase
 
 class FFirebaseAnalyticsProvider : public IAnalyticsProvider
-{ 
+{
 public:
 	FFirebaseAnalyticsProvider();
+	virtual ~FFirebaseAnalyticsProvider();
 
-	virtual bool StartSession(const TArray<FAnalyticsEventAttribute>& Attributes) override;
+	bool StartSession(const TArray<FAnalyticsEventAttribute>& Attributes) override;
 
-	virtual void EndSession() override;
+	void EndSession() override;
 
-	virtual void RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes) override;
+	void RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes) override;
 
-	virtual FString GetSessionID() const override;
+	FString GetSessionID() const override;
 
-	virtual bool SetSessionID(const FString& InSessionID) override;
+	bool SetSessionID(const FString& InSessionID) override;
 
-	virtual void FlushEvents() override;
+	void FlushEvents() override;
 
-	virtual void SetUserID(const FString& InUserID) override;
+	void SetUserID(const FString& InUserID) override;
 
-	virtual FString GetUserID() const override;
+	FString GetUserID() const override;
 
-	~FFirebaseAnalyticsProvider();
+protected:
+	void AttributesToParameters(const TArray<FAnalyticsEventAttribute>& Attributes, std::vector<::firebase::analytics::Parameter>& Out);
 
 private:
-	::firebase::App* FirebaseApp{ nullptr };
+	::firebase::App* FirebaseApp;
 };
-

@@ -3,11 +3,7 @@ Firebase analytics provider for Unreal Engine 4.
 
 # Imrpotant notes: 
 Plugin currently support only Android target platfrom, iOS not currently working (if you can finish the job, please feel free to do PR).
-Current supported engine version: 4.24.* (master branch)
-
-# Features
-1. Android multiple CPU architecture support
-2. Full exposed firebase analytics functionality to own blueprint library (do not requires default AnalyticsBlueprintLibrary plugin)
+Current supported engine version: 4.25.* (master branch)
 
 # Setup
 1. Download plugin
