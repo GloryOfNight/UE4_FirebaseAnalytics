@@ -9,8 +9,15 @@ public class FirebaseAnalytics : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		PublicDependencyModuleNames.AddRange(new string[]{"Core", "CoreUObject", "Engine" , "Analytics"});
-		
-		PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/include/")));
+
+		PublicIncludePaths.AddRange
+		(
+			new string[]
+			{
+				"$(ModuleDir)/Public",
+				Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/include/"))
+			}
+		);
 
 		string FirebaseSDK_LibPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/firebase_cpp_sdk/libs/"));
 

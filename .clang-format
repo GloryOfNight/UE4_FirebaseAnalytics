@@ -1,0 +1,42 @@
+Language: Cpp
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: DontAlign   
+AlignTrailingComments: true
+AlignEscapedNewlines: Right
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: InlineOnly
+AccessModifierOffset: -4
+KeepEmptyLinesAtTheStartOfBlocks: false
+IndentWidth:     4
+IndentWrappedFunctionNames: false
+IndentCaseLabels: false
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:           '.*\.generated\.h'
+    Priority:        100
+  - Regex:           '".*(/).*"'
+    Priority:        98
+  - Regex:           '".*"'
+    Priority:        99
+  - Regex:           '<.*>'
+    Priority:        97
+NamespaceIndentation: All
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman
+BreakConstructorInitializersBeforeComma: true
+BreakConstructorInitializers: BeforeComma
+BreakStringLiterals: false
+DerivePointerAlignment: false
+DisableFormat:   false
+MaxEmptyLinesToKeep: 1
+PointerAlignment: Left
+ReflowComments:  false
+SortIncludes:    true
+SortUsingDeclarations: true
+SpacesInAngles: false
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeParens: ControlStatements
+Standard:        c++14
+TabWidth:        4
+UseTab:          Always
+ColumnLimit:     0
