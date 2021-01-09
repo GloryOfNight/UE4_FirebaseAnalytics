@@ -8,11 +8,11 @@ Current supported engine version: 4.25.* (master branch)
 # Setup
 1. Download plugin
 2. Place FirebaseAnalytics in Plugins folder in your project (if don't exist needed to be created)
-2.1 (if using C++) Right Mouse Click to .uproject file -> Generate Project Files 
-3. Open Firebase console and create project (follow the instructions on site)
-4. Download google-services.json file
-5. Place google-services.json into folder ProjectFolder/Build/Android/gradle/app/ 
-6. Open Config/DefaultEngine.ini file and add:
+3. (if using C++) Right Mouse Click to .uproject file -> Generate Project Files 
+4. Open Firebase console and create project (follow the instructions on site)
+5. Download google-services.json file
+6. Place google-services.json into folder ProjectFolder/Build/Android/gradle/app/ 
+7. Open Config/DefaultEngine.ini file and add:
 ```
 [Analytics]
 ProviderModuleName=FirebaseAnalytics
