@@ -96,13 +96,20 @@ void UFirebaseAnalyticsUtils::RecordFirebasePurchase(const FString& Affiliation,
 
 void UFirebaseAnalyticsUtils::RecordFirebasePurchase(const FString& Affiliation, const FString& Coupon, const FString& Currency, const TArray<FString>& Items, const double Shipping, const double Tax, const FString& TransactionID, const double Value)
 {
+	std::vector<std::string> ItemsVec;
+	ItemsVec.reserve(Items.Num());
+	for (const auto& Item : Items)
+	{
+		ItemsVec.push_back(TCHAR_TO_UTF8(*Item));
+	}
+
 	// clang-format off
 	std::vector<::firebase::analytics::Parameter> Parameters = 
 	{
 		{::firebase::analytics::kParameterAffiliation, TCHAR_TO_UTF8(*Affiliation)}, 
 		{::firebase::analytics::kParameterCoupon, TCHAR_TO_UTF8(*Coupon)},
 		{::firebase::analytics::kParameterCurrency, TCHAR_TO_UTF8(*Currency)},
-		{"items", (Items, Items.Num())},
+		{"items", ItemsVec},
 		{::firebase::analytics::kParameterShipping, Shipping},
 		{::firebase::analytics::kParameterTax, Tax},
 		{::firebase::analytics::kParameterTransactionID, TCHAR_TO_UTF8(*TransactionID)},
