@@ -1,6 +1,8 @@
 # UE4_FirebaseAnalytics
 Firebase analytics provider for Unreal Engine 4. 
 
+#### No longer supported, please consider using: https://github.com/nprudnikov/PrFirebase
+
 # Imrpotant notes: 
 Plugin currently support only Android target platfrom, iOS not currently working (if you can finish the job, please feel free to do PR).
 Current supported engine version: 4.25.* (master branch)
